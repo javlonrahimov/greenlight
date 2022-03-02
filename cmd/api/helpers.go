@@ -27,7 +27,7 @@ func (app *application) readIdParam(r *http.Request) (int64, error) {
 
 func (app *application) writeJson(w http.ResponseWriter, status int, data envelope, headers http.Header) error {
 
-	js, err := json.MarshalIndent(data, "", "\n")
+	js, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
 		return err
 	}
@@ -88,4 +88,9 @@ func (app *application) readJSON(w http.ResponseWriter, r *http.Request, dst int
 		return errors.New("body must only contain a single JSON value")
 	}
 	return nil
+}
+
+func (app *application) editConflictResponse(w http.ResponseWriter, r *http.Request) {
+	message := "unable to update the record due to an edit conflict, please try again"
+	app.errorResponse(w, r, http.StatusConflict, message)
 }
