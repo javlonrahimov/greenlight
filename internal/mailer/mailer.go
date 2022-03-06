@@ -20,7 +20,7 @@ type Mailer struct {
 func New(host string, port int, username, password, sender string) Mailer {
 
 	dialer := mail.NewDialer(host, port, username, password)
-	dialer.Timeout = 1 * time.Minute
+	dialer.Timeout = 10 * time.Second
 
 	return Mailer{
 		dialer: dialer,
