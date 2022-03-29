@@ -20,7 +20,7 @@ import (
 
 var (
 	buildTime string
-	version string
+	version   string
 )
 
 type config struct {
